@@ -17,37 +17,37 @@ module.exports.run = async (client, message, args, arguments) => {
         if (user.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");
 
         // If the user is the message author itself, stop.
-        if (user.id === message.author.id) return message.reply("Kendini kickleyemezsin.");
+        if (user.id === message.author.id) return message.reply("Kendini atamazsın.");
 
         // If the member has a lower or equal role as the user, stop.
-        if (umember.highestRole.position >= message.member.highestRole.position) return message.reply("Senden yüksek ya da eşit rolde olan birini kickleyemezsin.");
+        if (umember.highestRole.position >= message.member.highestRole.position) return message.reply("Senden yüksek ya da eşit rolde olan birini atamazsın.");
 
-        if (umember.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Kendimden yüksek ya da eşit rolde olan birini kickleyemiyorum.");
+        if (umember.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Kendimden yüksek ya da eşit rolde olan birini atamıyorum.");
 
         // If the reason exists:
         if (args[1]) {
             // Kick the member.
-            umember.kick(`${message.author.tag} tarafıncan kicklendi. Neden: ${reason}`).then(() => {
-                message.reply(`${user} kicklendi. \n**__Neden:__ ${reason}**`);
+            umember.kick(`${message.author.tag} tarafıncan atıldı. Neden: ${reason}`).then(() => {
+                message.reply(`${user} atıldı. \n**__Neden:__ ${reason}**`);
                 // Did domething happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı kickleyemiyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
                 console.error(e.stack);
             });
             return;
             // If the reason doesn't exists:
         } else {
             // Kick the member.
-            umember.kick(`${message.author.tag} tarafından kicklendi. Neden belirtilmedi.`).then(() => {
-                message.reply(`${user} kicklendi. Neden belirtilmedi.`);
+            umember.kick(`${message.author.tag} tarafından atıldı. Neden belirtilmedi.`).then(() => {
+                message.reply(`${user} atıldı. Neden belirtilmedi.`);
                 // Did something happen? Express it.
             }).catch(e => {
                 if (e.message === "Missing Access" || "Missing Permissions") {
-                    message.reply("Şu anda bu kullanıcıyı kickleyemiyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
                     console.error(e.stack);
                     return;
                 } else {
-                    message.reply("Şu anda bu kullanıcıyı kickleyemiyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
                     console.error(e.stack);
                 }
             });

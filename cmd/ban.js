@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args) => {
     if (user) {
 
         // If the user is the message author itself, stop.
-        if (user.id === message.author.id) return message.reply("Kendini banlayamazsın.");
+        if (user.id === message.author.id) return message.reply("Kendini yasaklayamazsın.");
 
         // If the user is the bot itself, stop.
         if (user.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");
@@ -21,31 +21,31 @@ module.exports.run = async (client, message, args) => {
         if (!message.member.hasPermission("BAN_MEMBERS")) return;
 
         // If the member has a lower or equal role as the user, stop.
-        if (umember.highestRole.position >= message.member.highestRole.position) return message.reply("Senden yüksek ya da eşit rolde olan birini banlayamazsın.");
+        if (umember.highestRole.position >= message.member.highestRole.position) return message.reply("Senden yüksek ya da eşit rolde olan birini yasaklayamazsın.");
 
-        if (umember.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Kendimden yüksek ya da eşit rolde birini banlayamıyorum.");
+        if (umember.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Kendimden yüksek ya da eşit rolde birini yasaklayamıyorum.");
 
         // If the reason exists:
         if (args[1]) {
             // Ban the member.
             umember.ban({
-                reason: `${message.author.tag} tarafından banlandı. Neden: ${reason}`
+                reason: `${message.author.tag} tarafından yasaklandı. Neden: ${reason}`
             }).then(() => {
-                message.reply(`${user} banlandı. \n**__Neden:__ ${reason}**`);
+                message.reply(`${user} yasaklandı. \n**__Neden:__ ${reason}**`);
                 // Did domething happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı banlayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
                 console.error(e.stack);
             });
             return;
             // If the reason doesn't exists:
         } else {
             // Ban the member.
-            umember.ban(`${message.author.tag} tarafından banlandı. Neden belirtilmedi.`).then(() => {
-                message.reply(`${user} banlandı. Neden belirtilmedi.`);
+            umember.ban(`${message.author.tag} tarafından yasaklandı. Neden belirtilmedi.`).then(() => {
+                message.reply(`${user} yasaklandı. Neden belirtilmedi.`);
                 // Did something happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı banlayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
                 console.error(e.stack);
             });
         }
