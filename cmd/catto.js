@@ -18,7 +18,7 @@ module.exports.run = async (client, message, args) => {
 
     } catch (err) {
 
-        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` <@!294910512783949825> ");
+        message.channel.send("Bir hata meydana geldi, lütfen yeniden dene.");
         console.error(err.stack);
 
     }
