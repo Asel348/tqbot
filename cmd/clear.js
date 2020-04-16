@@ -6,6 +6,7 @@ module.exports.run = async (client, message, args) => {
         const messagesToClean = args[0];
         const cleanMine = args[1];
 
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
         if (!messagesToClean) return message.channel.send("Lütfen temizlenecek mesaj sayısını belirtin.");
         if (isNaN(messagesToClean)) return message.channel.send("Geçersiz sayı girildi.");
 
@@ -34,7 +35,7 @@ module.exports.run = async (client, message, args) => {
 
     } catch (err) {
 
-        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "```");
+        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` <@!294910512783949825>");
         console.error(err.stack);
 
     }

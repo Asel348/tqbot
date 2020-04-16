@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args) => {
                 message.reply(`${user} yasaklandı. \n**__Neden:__ ${reason}**`);
                 // Did domething happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825>");
                 console.error(e.stack);
             });
             return;
@@ -45,7 +45,7 @@ module.exports.run = async (client, message, args) => {
                 message.reply(`${user} yasaklandı. Neden belirtilmedi.`);
                 // Did something happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825>");
                 console.error(e.stack);
             });
         }

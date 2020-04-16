@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args, arguments) => {
 
     } catch (err) {
 
-        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` Lütfen bu durumu Asil#1514'e bildirin.");
+        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` <@!294910512783949825> ");
         console.error(err.stack);
         
     }

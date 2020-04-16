@@ -15,11 +15,9 @@ module.exports.run = async (client, message, args) => {
             file: url
         });
 
-        msg.delete();
-
     } catch (err) {
 
-        message.channel.send("Oh no! An error occured: ```javascript\n" + err + "```");
+        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "```");
         console.error(err.stack);
 
     }

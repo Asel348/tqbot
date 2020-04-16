@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
 
-    if (message.author.id !== "294910512783949825") return message.channel.send("Bu komutu kullanmak için yetkin yok!");
+    if (message.author.id !== "294910512783949825") return;
 
     const code = args.join(" ");
     try {

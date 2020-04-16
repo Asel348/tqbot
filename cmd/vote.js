@@ -49,7 +49,7 @@ module.exports.run = async (client, message, args, arguments) => {
         await message.reply(`**"${voteArg}**" oylaması sona erdi. \n**__Sonuçlar:__**\n\n${agree} : ${agreeCount}\n${disagree} : ${disagreeCount}`);
         // msg.delete();
     } catch (err) {
-        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` Lütfen bu durumu AsiL#1514'e bildirin.");
+        message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` <@!294910512783949825> ");
         console.error(err.stack);
     }
 }

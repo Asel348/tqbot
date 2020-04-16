@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args) => {
 
         return;
     } catch (err) {
-        message.channel.send("Şu anda bu kullanıcının susturmasını kaldıramıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+        message.channel.send("Şu anda bu kullanıcının susturmasını kaldıramıyorum: ```javascript\n" + e + "```\n <@!294910512783949825> ");
         console.error(err.stack);
     }
 }

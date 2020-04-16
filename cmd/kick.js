@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args, arguments) => {
                 message.reply(`${user} atıldı. \n**__Neden:__ ${reason}**`);
                 // Did domething happen? Express it.
             }).catch(e => {
-                message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825> ");
                 console.error(e.stack);
             });
             return;
@@ -43,11 +43,11 @@ module.exports.run = async (client, message, args, arguments) => {
                 // Did something happen? Express it.
             }).catch(e => {
                 if (e.message === "Missing Access" || "Missing Permissions") {
-                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n  <@!294910512783949825> ");
                     console.error(e.stack);
                     return;
                 } else {
-                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+                    message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825> ");
                     console.error(e.stack);
                 }
             });

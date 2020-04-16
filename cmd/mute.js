@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
         if (!message.guild.me.hasPermission("MUTE_MEMBERS")) return message.reply("I need the **Mute Members** permission to properly function.");
 
         // If the message sender does not have permission to manage messages, stop.
-        if (!message.member.hasPermission("MUTE_MESSAGES")) return;
+        if (!message.member.hasPermission("MUTE_MEMBERS")) return;
 
         // If the mutee is the bot itself, stop.
         if (toMute.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");
@@ -18,12 +18,12 @@ module.exports.run = async (client, message, args) => {
         if (!toMute) return message.channel.send("Lütfen bir kullanıcı belirtin.");
 
         // If the message contains the message sender's information, stop.
-        if (toMute.id === message.author.id) return message.channel.send("Kendini mutelayamazsın.")
+        if (toMute.id === message.author.id) return message.channel.send("Kendini susturamazsın.")
 
         // If the mutee has a higher role than the message sender, stop.
-        if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send("Senden yüksek ya da aynı rolde olan birini mutelayamazsın.");
+        if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send("Senden yüksek ya da aynı rolde olan birini susturamam.");
 
-        if (toMute.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Benden yüksek ya da aynı rolde olan birini mutelayamam.");
+        if (toMute.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send("Benden yüksek ya da aynı rolde olan birini susturamam.");
 
         // Find the "Muted" role. If there is no such role, create.
         let role = message.guild.roles.find(r => r.name === "Mute");
@@ -41,22 +41,22 @@ module.exports.run = async (client, message, args) => {
                     });
                 })
             } catch (e) {
-                message.channel.send("Rol oluştururken bir hata meydana geldi: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.")
+                message.channel.send("Rol oluştururken bir hata meydana geldi: ```javascript\n" + e + "```\n <@!294910512783949825> ")
                 console.log(e.stack)
             }
         }
 
         // If the mutee is already muted, stop.
-        if (toMute.roles.has(role.id)) return message.channel.send("Bu kullanıcı zaten mutelanmış.")
+        if (toMute.roles.has(role.id)) return message.channel.send("Bu kullanıcı zaten susturulmuş.")
 
         // Mute the mutee.
         await toMute.addRole(role);
         await toMute.setMute(true);
-        message.channel.send(`${toMute} mutelandı.`)
+        message.channel.send(`${toMute} susturuldu.`)
 
         return;
     } catch (err) {
-        message.channel.send("Şu anda bu kullanıcıyı mutelayamıyorum: ```javascript\n" + e + "```\n Lütfen bu durumu Asil#1514'e bildirin.");
+        message.channel.send("Bir hata meydana geldi: ```javascript\n" + e + "```\n <@!294910512783949825> ");
         console.error(err.stack);
     }
 }
