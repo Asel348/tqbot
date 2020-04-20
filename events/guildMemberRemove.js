@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports = (client, member) => {
 
     const msgEmbed = new Discord.RichEmbed()
-    .setColor("#FF5347")
+    .setColor("#292b2c")
     .setTitle("**ÜYE AYRILDI**")
     .setURL("https://www.idk.com/")
     .setAuthor(member.user.tag, member.user.avatarURL)
