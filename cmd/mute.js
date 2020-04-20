@@ -1,9 +1,11 @@
+const Discord = require('discord.js');
+
 module.exports.run = async (client, message, args) => {
 
     // using try/catch because why not
 
     if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular") || message.member.roles.find(r => r.name === "Deneme Moderator")) {
-        
+
         try {
 
             // Specify the mutee
@@ -40,7 +42,8 @@ module.exports.run = async (client, message, args) => {
                     message.guild.channels.forEach(async (channel, id) => {
                         await channel.overwritePermissions(role, {
                             SEND_MESSAGES: false,
-                            ADD_REACTIONS: false
+                            ADD_REACTIONS: false,
+                            SPEAK: false
                         });
                     })
                 } catch (e) {
@@ -54,12 +57,17 @@ module.exports.run = async (client, message, args) => {
 
             // Mute the mutee.
             await toMute.addRole(role);
-            await toMute.setMute(true);
             message.channel.send(`${toMute} susturuldu.`)
-
+            const msgEmbed = new Discord.RichEmbed()
+                .setColor("#0275d8")
+                .setTitle("**KULLANICI SUSTURULDU**")
+                .setURL("https://www.idk.com/")
+                .setAuthor(toMute.user.tag, toMute.user.avatarURL)
+                .setTimestamp();
+            toMute.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
             return;
         } catch (err) {
-            message.channel.send("Bir hata meydana geldi: ```javascript\n" + e + "```\n <@!294910512783949825> ");
+            message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "```\n <@!294910512783949825> ");
             console.error(err.stack);
         }
     }

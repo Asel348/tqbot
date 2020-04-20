@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports.run = async (client, message, args) => {
 
     // Declare constant variables.
@@ -34,6 +36,14 @@ module.exports.run = async (client, message, args) => {
                     reason: `${message.author.tag} tarafından yasaklandı. Neden: ${reason}`
                 }).then(() => {
                     message.reply(`${user} yasaklandı. \n**__Neden:__ ${reason}**`);
+                    const msgEmbed = new Discord.RichEmbed()
+                        .setColor("#d9534f")
+                        .setTitle("**KULLANICI YASAKLANDI**")
+                        .setURL("https://www.idk.com/")
+                        .setAuthor(user.tag, user.avatarURL)
+                        .setDescription(`**__Neden:__ ${reason}**`)
+                        .setTimestamp();
+                    umember.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
                     // Did domething happen? Express it.
                 }).catch(e => {
                     message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825>");
@@ -45,6 +55,14 @@ module.exports.run = async (client, message, args) => {
                 // Ban the member.
                 umember.ban(`${message.author.tag} tarafından yasaklandı. Neden belirtilmedi.`).then(() => {
                     message.reply(`${user} yasaklandı. Neden belirtilmedi.`);
+                    const msgEmbed = new Discord.RichEmbed()
+                        .setColor("#d9534f")
+                        .setTitle("**KULLANICI YASAKLANDI**")
+                        .setURL("https://www.idk.com/")
+                        .setAuthor(user.tag, user.avatarURL)
+                        .setDescription(`Neden belirtilmedi.`)
+                        .setTimestamp();
+                    umember.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
                     // Did something happen? Express it.
                 }).catch(e => {
                     message.reply("Şu anda bu kullanıcıyı yasaklayamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825>");

@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports.run = async (client, message, args, arguments) => {
 
     // Declare constant variables.
@@ -31,6 +33,14 @@ module.exports.run = async (client, message, args, arguments) => {
                 // Kick the member.
                 umember.kick(`${message.author.tag} tarafıncan atıldı. Neden: ${reason}`).then(() => {
                     message.reply(`${user} atıldı. \n**__Neden:__ ${reason}**`);
+                    const msgEmbed = new Discord.RichEmbed()
+                        .setColor("#f0ad4e")
+                        .setTitle("**KULLANICI ATILDI**")
+                        .setURL("https://www.idk.com/")
+                        .setAuthor(user.tag, user.avatarURL)
+                        .setDescription(`**__Neden:__ ${reason}**`)
+                        .setTimestamp();
+                    umember.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
                     // Did domething happen? Express it.
                 }).catch(e => {
                     message.reply("Şu anda bu kullanıcıyı atamıyorum: ```javascript\n" + e + "```\n <@!294910512783949825> ");
@@ -42,6 +52,14 @@ module.exports.run = async (client, message, args, arguments) => {
                 // Kick the member.
                 umember.kick(`${message.author.tag} tarafından atıldı. Neden belirtilmedi.`).then(() => {
                     message.reply(`${user} atıldı. Neden belirtilmedi.`);
+                    const msgEmbed = new Discord.RichEmbed()
+                        .setColor("#f0ad4e")
+                        .setTitle("**KULLANICI ATILDI**")
+                        .setURL("https://www.idk.com/")
+                        .setAuthor(user.tag, user.avatarURL)
+                        .setDescription(`Neden belirtilmedi.`)
+                        .setTimestamp();
+                    umember.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
                     // Did something happen? Express it.
                 }).catch(e => {
                     if (e.message === "Missing Access" || "Missing Permissions") {

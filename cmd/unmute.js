@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports.run = async (client, message, args) => {
 
     // using try/catch because why not
@@ -28,13 +30,19 @@ module.exports.run = async (client, message, args) => {
         if (!role || !toMute.roles.has(role.id)) return message.channel.send("Bu kullanıcı susturulmamış.")
 
         // Unmute the mutee.
-        await toMute.setMute(false);
         await toMute.removeRole(role);
         message.channel.send(`${toMute} kullanıcısının susturulması kaldırıldı.`)
+        const msgEmbed = new Discord.RichEmbed()
+            .setColor("#5bc0de")
+            .setTitle("**KULLANICININ SUSTURULMASI KALDIRILDI**")
+            .setURL("https://www.idk.com/")
+            .setAuthor(toMute.user.tag, toMute.user.avatarURL)
+            .setTimestamp();
+        toMute.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
 
         return;
     } catch (err) {
-        message.channel.send("Şu anda bu kullanıcının susturmasını kaldıramıyorum: ```javascript\n" + e + "```\n <@!294910512783949825> ");
+        message.channel.send("Şu anda bu kullanıcının susturmasını kaldıramıyorum: ```javascript\n" + err + "```\n <@!294910512783949825> ");
         console.error(err.stack);
     }
 }
