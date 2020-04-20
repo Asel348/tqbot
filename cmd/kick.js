@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, arguments) => {
 
     if (!message.guild.me.hasPermission("KICK_MEMBERS")) return message.reply("I need the **Kick Members** permission to properly function.");
 
-    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular")) {
+    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular") || message.member.roles.find(r => r.name === "Admin")) {
 
         // If the user exists:
         if (user) {

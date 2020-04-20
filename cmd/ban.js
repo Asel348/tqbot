@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args) => {
 
     if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.reply("I need the **Ban Members** permission to properly function.");
 
-    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular")) {
+    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular") || message.member.roles.find(r => r.name === "Admin")) {
 
         // If the user exists:
         if (user) {
