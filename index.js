@@ -127,7 +127,7 @@ client.on('message', async message => {
             }
         } catch (err) {
 
-            message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "```  <@!294910512783949825> ");
+            message.channel.send("Bir hata meydana geldi. Lütfen yeniden dene. Sorun devam ederse lütfen <@!294910512783949825>'e bildir.");
             queue.delete(message.guild.id);
             console.error(err.stack);
 
@@ -137,6 +137,7 @@ client.on('message', async message => {
         if (!message.member.voiceChannel) return message.reply("bir ses kanalında olmadan bu komutu kullanamazsın.");
         if (!serverQueue) return;
         serverQueue.connection.dispatcher.end();
+        return message.react("⏭️");
 
     } else if (command === "..stop") {
         try {
@@ -145,10 +146,11 @@ client.on('message', async message => {
             if (!serverQueue) return;
             serverQueue.songs = [];
             serverQueue.connection.dispatcher.end();
+            return message.react("⏹️");
 
         } catch (err) {
 
-            message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "```  <@!294910512783949825> ");
+            message.channel.send("Bir hata meydana geldi: ```javascript\n" + err + "``` <@!294910512783949825> ");
             console.error(err.stack);
 
         }
