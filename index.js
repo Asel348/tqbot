@@ -13,6 +13,8 @@ const readdir = promisify(require("fs").readdir);
 const ytdl = require("ytdl-core");
 const ytsearch = require("yt-search");
 
+// yay
+
 // CONSTANT VARIABLES //
 const PREFIX = "..";
 const TOKEN = process.env.token;
