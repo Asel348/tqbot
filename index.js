@@ -84,6 +84,7 @@ client.on('message', async message => {
 
             const voiceChannel = message.member.voiceChannel;
             if (!voiceChannel) return message.reply("bir ses kanalında olmadan bu komutu kullanamazsın.");
+            if (!args[0]) return;
 
             let songInfo;
             let song;
@@ -158,14 +159,18 @@ client.on('message', async message => {
 
         if (!serverQueue) return message.reply("şu anda hiçbir şey oynatılmıyor.");
         if (!args[0]) return message.channel.send(`Şu anda ses yüksekliği: **${serverQueue.volume}**`)
+        if ((args[0] > 5) || (args[0] < 0)) return message.reply("ses yüksekliği 0'dan küçük, 5'den büyük olamaz.")
         serverQueue.volume = args[0];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] / 5);
         return message.channel.send(`Şu anda ses yüksekliği: **${args[0]}**`)
 
     } else if (command === "..np") {
+
         if (!serverQueue) return message.reply("şu anda hiçbir şey oynatılmıyor.");
         return message.channel.send(`**${serverQueue.songs[0].title}** şu anda oynatılıyor.`)
+
     } else if (command === "..q") {
+
         if (!serverQueue) return message.reply("şu anda hiçbir şey oynatılmıyor.");
         return message.channel.send(`
 __**Video sırası:**__
@@ -174,14 +179,18 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join(`\n`)}
 
 **Şu anda oynatılıyor:** ${serverQueue.songs[0].title}
         `);
+
     } else if (command === "..pause") {
+
         if (serverQueue && serverQueue.playing) {
             serverQueue.playing = false;
             serverQueue.connection.dispatcher.pause();
             return message.react("⏸️");
+
         }
         return message.reply("şu anda hiçbir şey oynatılmıyor.");
     } else if (command === "..resume") {
+        
         if (serverQueue && !serverQueue.playing) {
             serverQueue.playing = true;
             serverQueue.connection.dispatcher.resume();
