@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
             if (!user.avatarURL) return message.reply("kullanıcının bir profil resmi bulunmuyor.");
             message.channel.send(user.avatarURL);
         } else {
-            if (message.author.avatarURL) return message.reply("bir profil resmin bulunmuyor.");
+            if (!message.author.avatarURL) return message.reply("bir profil resmin bulunmuyor.");
             message.channel.send(message.author.avatarURL);
         }
 
