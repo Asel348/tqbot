@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) => {
 
     // using try/catch because why not
 
-    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular") || message.member.roles.find(r => r.name === "Deneme Moderator") || message.member.roles.find(r => r.name === "Admin")) {
+    if (message.member.roles.find(r => r.name === "Moderatör") || message.member.roles.find(r => r.name === "Kurucular") || message.member.roles.find(r => r.name === "Deneme Moderator") || message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Developer")) {
 
         try {
 
