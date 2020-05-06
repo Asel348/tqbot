@@ -6,8 +6,6 @@ module.exports.run = async (client, message, args) => {
     // using try/catch because why not
     try {
 
-        let msg = await message.channel.send("Generating...");
-
         let url = (await snek.get(api)).body.url;
         if (!url) return message.channel.send("Bir şeyler oldu! Yeniden dene.");
 
