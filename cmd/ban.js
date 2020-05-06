@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) => {
             if (user.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");
 
             // If the user doesn't have the permissions to ban members, stop.
-            if (!message.member.hasPermission("BAN_MEMBERS")) return;
+            //if (!message.member.hasPermission("BAN_MEMBERS")) return;
 
             // If the member has a lower or equal role as the user, stop.
             if (umember.highestRole.position >= message.member.highestRole.position) return message.reply("Senden yüksek ya da eşit rolde olan birini yasaklayamazsın.");

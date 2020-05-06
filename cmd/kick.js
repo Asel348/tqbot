@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, arguments) => {
         if (user) {
 
             // If the user doesn't have the permissions to kick members, stop.
-            if (!message.member.hasPermission("KICK_MEMBERS")) return;
+            //if (!message.member.hasPermission("KICK_MEMBERS")) return;
 
             // If the user is the bot itself, stop.
             if (user.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");

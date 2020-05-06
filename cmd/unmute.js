@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
         try {
 
             // If the message sender does not have permission to manage messages, stop.
-            if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
+            //if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
 
             // Specify the mutee
             let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
@@ -28,12 +28,14 @@ module.exports.run = async (client, message, args) => {
 
             // Find the "Muted" role.
             let role = message.guild.roles.find(r => r.name === "Mute");
+            let oRole = message.guild.roles.find(r => r.name === "Onaylı Üye");
 
             // If the mutee isn't muted, stop.
             if (!role || !toMute.roles.has(role.id)) return message.channel.send("Bu kullanıcı susturulmamış.")
 
             // Unmute the mutee.
             await toMute.removeRole(role);
+            await toMute.addRole(oRole);
             message.channel.send(`${toMute} kullanıcısının susturulması kaldırıldı.`)
             const msgEmbed = new Discord.RichEmbed()
                 .setColor("#5bc0de")

@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args) => {
             if (!message.guild.me.hasPermission("MUTE_MEMBERS")) return message.reply("I need the **Mute Members** permission to properly function.");
 
             // If the message sender does not have permission to manage messages, stop.
-            if (!message.member.hasPermission("MUTE_MEMBERS")) return;
+            //if (!message.member.hasPermission("MUTE_MEMBERS")) return;
 
             // If the mutee is the bot itself, stop.
             if (toMute.id === client.user.id) return message.reply("haha. güzel deneme, ama hayır.");
@@ -32,6 +32,7 @@ module.exports.run = async (client, message, args) => {
 
             // Find the "Muted" role. If there is no such role, create.
             let role = message.guild.roles.find(r => r.name === "Mute");
+            let oRole = message.guild.roles.find(r => r.name === "Onaylı Üye");
             if (!role) {
                 try {
                     role = await message.guild.createRole({
@@ -57,6 +58,7 @@ module.exports.run = async (client, message, args) => {
 
             // Mute the mutee.
             await toMute.addRole(role);
+            await toMute.removeRole(oRole);
             message.channel.send(`${toMute} susturuldu.`)
             const msgEmbed = new Discord.RichEmbed()
                 .setColor("#0275d8")
