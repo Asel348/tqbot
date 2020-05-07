@@ -6,6 +6,7 @@ module.exports.run = async (client, message, args) => {
     try {
 
         if (args[0]) {
+            if (!user) return;
             if (!user.avatarURL) return message.reply("kullanıcının bir profil resmi bulunmuyor.");
             message.channel.send(user.avatarURL);
         } else {
