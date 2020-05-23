@@ -159,7 +159,11 @@ client.on('message', async message => {
 
         if (!serverQueue) return message.reply("şu anda hiçbir şey oynatılmıyor.");
         if (!args[0]) return message.channel.send(`Şu anda ses yüksekliği: **${serverQueue.volume}**`)
-        if ((args[0] > 5) || (args[0] < 0)) return message.reply("ses yüksekliği 0'dan küçük, 5'den büyük olamaz.")
+        if ((args[0] > 5) || (args[0] < 0)) {
+            if (message.guild.id === "461916478346887168") {
+                return message.reply("ses yüksekliği 0'dan küçük, 5'den büyük olamaz.")
+            }
+        }
         serverQueue.volume = args[0];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] / 5);
         return message.channel.send(`Şu anda ses yüksekliği: **${args[0]}**`)
