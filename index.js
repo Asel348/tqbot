@@ -93,15 +93,17 @@ client.on('message', async message => {
                 songInfo = await ytdl.getInfo(args[0]);
                 song = {
                     title: Util.escapeMarkdown(songInfo.title),
-                    url: songInfo.video_url
+                    url: await songInfo.video_url
                 }
+                console.log(song.url);
             } else {
                 var searchResult = await ytsearch(searchArgs);
                 songInfo = await ytdl.getInfo(searchResult.videos[0].url);
                 song = {
                     title: Util.escapeMarkdown(songInfo.title),
-                    url: songInfo.video_url
+                    url: await songInfo.video_url
                 }
+                console.log(song.url);
             }
 
             if (!serverQueue) {
