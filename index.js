@@ -89,21 +89,31 @@ client.on('message', async message => {
             let songInfo;
             let song;
 
-            if (args[0].startsWith("http")) {
+            if (args[0].startsWith("https://www.youtube.com/watch")) {
                 songInfo = await ytdl.getInfo(args[0]);
                 song = {
                     title: Util.escapeMarkdown(songInfo.title),
                     url: await songInfo.video_url
                 }
-                console.log(song.url);
             } else {
                 var searchResult = await ytsearch(searchArgs);
+                let i = 0;
+                while (true) {
+                    if (!searchResult.videos[0]) {
+                        var searchResult = await ytsearch(searchArgs);
+                    } else {
+                        break;
+                    }
+                    if (i == 5) {
+                        return message.reply("video bulunamadı. Bunun bir hata olduğunu düşünüyorsan, zaten kime yazman gerektiğini biliyorsun.");
+                    }
+                    i++
+                }
                 songInfo = await ytdl.getInfo(searchResult.videos[0].url);
                 song = {
                     title: Util.escapeMarkdown(songInfo.title),
                     url: await songInfo.video_url
                 }
-                console.log(song.url);
             }
 
             if (!serverQueue) {
@@ -196,7 +206,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join(`\n`)}
         }
         return message.reply("şu anda hiçbir şey oynatılmıyor.");
     } else if (command === "..resume") {
-        
+
         if (serverQueue && !serverQueue.playing) {
             serverQueue.playing = true;
             serverQueue.connection.dispatcher.resume();
