@@ -17,9 +17,10 @@ const ytsearch = require("yt-search");
 
 // CONSTANT VARIABLES //
 const PREFIX = "..";
-const TOKEN = process.env.token;
+const TOKEN = "Njk5OTMxNjk3NjE3MTc0NTU4.XpbsWg.g6Vbcb5r86DKp1vFTj-ZVM7exBk";
 
 const queue = new Map();
+let serverQueue;
 
 // Read ./cmd/ and set the commands
 client.commands = new Discord.Collection();
@@ -72,12 +73,14 @@ client.on('message', async message => {
 
     if (message.content.indexOf(PREFIX) !== 0) return;
 
-    const serverQueue = queue.get(message.guild.id);
+    serverQueue = queue.get(message.guild.id);
 
     const searchArgs = arguments.slice(1).join(' ');
 
     let cmd = client.commands.get(command.slice(PREFIX.length))
     if (cmd) cmd.run(client, message, args, arguments);
+
+    /////////////////////////////////////////////////////////////////// MUSIC FUNCTIONS ////////////////////////////////////////////////////////////////
 
     if (command === "..play") {
         try {
@@ -217,7 +220,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join(`\n`)}
 })
 
 function play(guild, song) {
-    const serverQueue = queue.get(guild.id);
+    serverQueue = queue.get(guild.id);
 
     if (!song) {
         serverQueue.voiceChannel.leave();
@@ -237,6 +240,23 @@ function play(guild, song) {
 
     serverQueue.textChannel.send(`**${song.title}** şimdi oynatılıyor.`)
 }
+
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+
+    let newUserChannel = newMember.voiceChannel
+    let oldUserChannel = oldMember.voiceChannel
+
+    if (newUserChannel === undefined) {
+        //if (oldMember.guild.id !== "461916478346887168") return;
+        if (!client.voiceConnections.array()[0]) return;
+        if (client.voiceConnections.array()[0].channel.members.array().length === 1) {
+            //console.log(serverQueue);
+            if (!serverQueue) return;
+            serverQueue.songs = [];
+            serverQueue.connection.dispatcher.end();
+        }
+    }
+});
 
 // Log in the client
 client.login(TOKEN);
