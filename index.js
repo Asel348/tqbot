@@ -17,7 +17,7 @@ const ytsearch = require("yt-search");
 
 // CONSTANT VARIABLES //
 const PREFIX = "..";
-const TOKEN = "Njk5OTMxNjk3NjE3MTc0NTU4.XpbsWg.g6Vbcb5r86DKp1vFTj-ZVM7exBk";
+const TOKEN = process.env.token;
 
 const queue = new Map();
 let serverQueue;
