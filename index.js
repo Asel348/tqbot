@@ -67,7 +67,7 @@ client.on('message', async message => {
 
     // Setting the arguments (--command arg[0] arg[1] arg[2] ... arg[n])
     let messageArray = message.content.split(/\s+/g);
-    let command = messageArray[0];
+    let command = messageArray[0].toLowerCase();
     let args = messageArray.slice(1);
     let arguments = message.content.split(' ');
 
