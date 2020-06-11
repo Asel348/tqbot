@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports.run = async (client, message, args) => {
 
     // using try/catch because why not
@@ -20,6 +22,17 @@ module.exports.run = async (client, message, args) => {
             }).then(messages => {
                 message.channel.bulkDelete(messages);
                 message.channel.send(`Kendi mesajın ile beraber ${messagesToClean} mesaj temizlendi.`).then(msg => msg.delete(5000));
+                const msgEmbed = new Discord.RichEmbed()
+                    .setColor("#f7f7f7")
+                    .setTitle("**MESAJLAR SİLİNDİ**")
+                    .setURL("https://www.idk.com/")
+                    .setAuthor(message.author.tag, message.author.avatarURL)
+                    .setDescription(message.content)
+                    .addField("Kanal:", message.channel.name)
+                    .setTimestamp();
+                if (message.guild.id === "461916478346887168") {
+                    message.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
+                }
             });
 
         } else {
@@ -30,6 +43,17 @@ module.exports.run = async (client, message, args) => {
                 msgArray.splice(0, 1);
                 message.channel.bulkDelete(msgArray);
                 message.channel.send(`${messagesToClean} mesaj temizlendi.`).then(msg => msg.delete(5000));
+                const msgEmbed = new Discord.RichEmbed()
+                    .setColor("#f7f7f7")
+                    .setTitle("**MESAJLAR SİLİNDİ**")
+                    .setURL("https://www.idk.com/")
+                    .setAuthor(message.author.tag, message.author.avatarURL)
+                    .setDescription(message.content)
+                    .addField("Kanal:", message.channel.name)
+                    .setTimestamp();
+                if (message.guild.id === "461916478346887168") {
+                    message.guild.channels.find(c => c.name === "kayıt-defteri").send(msgEmbed).catch(console.error);
+                }
             });
         };
 
