@@ -65,5 +65,3 @@ config.json
 .vscode/
 
 assets/
-
-package-lock.json
