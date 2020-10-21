@@ -108,7 +108,7 @@ client.on('message', async message => {
                         break;
                     }
                     if (i == 5) {
-                        return message.reply("video bulunamadı. Bunun bir hata olduğunu düşünüyorsan, zaten kime yazman gerektiğini biliyorsun.");
+                        return message.reply("video bulunamadı. Bunun bir hata olduğunu düşünüyorsan, lütfen <@!294910512783949825> ile iletişime geç.");
                     }
                     i++
                 }
